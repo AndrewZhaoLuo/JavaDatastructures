@@ -19,7 +19,7 @@ class ArrayListTest {
             assertEquals(i, testList.get(i));
         }
 
-        assertThrows(IndexOutOfBoundsException.class, () -> testList.get(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> testList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> testList.get(run));
     }
 
@@ -28,7 +28,8 @@ class ArrayListTest {
         ArrayList testList = new ArrayList();
 
         int run = ArrayList.DEFAULT_ARRAY_SIZE * 2;
-        for (int i = 0; i < run; i++) {
+        testList.addEnd(0);
+        for (int i = 1; i < run; i++) {
             testList.insert(0, i);
             assertEquals(i + 1, testList.getLength());
         }
