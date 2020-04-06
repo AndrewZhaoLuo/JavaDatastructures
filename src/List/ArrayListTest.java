@@ -38,7 +38,7 @@ class ArrayListTest {
         }
 
         assertThrows(IndexOutOfBoundsException.class, () -> testList.insert(-1, -1));
-        // assertThrows(IndexOutOfBoundsException.class, () -> testList.insert(run, run));
+        assertThrows(IndexOutOfBoundsException.class, () -> testList.insert(run, run));
     }
 
     @Test
