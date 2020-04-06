@@ -125,14 +125,3 @@ public class ArrayList implements List{
         return this.length;
     }
 }
-
-    @Override
-    public void clear() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int getLength() {
-        return this.length;
-    }
-}
