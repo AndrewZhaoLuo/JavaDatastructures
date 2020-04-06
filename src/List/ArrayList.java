@@ -29,13 +29,11 @@ public class ArrayList implements List{
     private void resize(int newBufferSize) {
         if (newBufferSize <= data.length) {
             String errorMsg = "Requested buffer of " + newBufferSize + " but current buffer size is " + data.length;
-            throw new ArgumentException(errorMsg);
+            throw new IllegalArgumentException(errorMsg);
         }
 
         int[] newData = new int[newBufferSize];
-        for (int i = 0; i < length; i++) {
-            newData[i] = data[i]
-        }
+        if (length >= 0) System.arraycopy(data, 0, newData, 0, length);
 
         data = newData;
     }
@@ -51,13 +49,12 @@ public class ArrayList implements List{
         checkIndex(i);
 
         // append to end of array, possibly resizing
+        int oldLength = length;
         addEnd(0);
 
-        // now this.length = 1 + oldLength, move up all elements starting from i
-        for (int j = i; j < this.length; j++) {
-            data[j] = data[j - 1];
-        }
-        data[j] = v;
+        // now underlying data is the correct size
+        if (oldLength - 1 - i >= 0) System.arraycopy(data, i, data, i + 1, oldLength - 1 - i);
+        data[i] = v;
     }
 
     @Override
@@ -74,7 +71,8 @@ public class ArrayList implements List{
             resize(data.length * 2);
         }
 
-        data[length - 1] = v;
+        data[length] = v;
+        length++;
     }
 
     @Override
@@ -83,8 +81,7 @@ public class ArrayList implements List{
             throw new IllegalStateException("List is empty!");
         }
 
-        int last = data[--length];
-        return last;
+        return data[--length];
     }
 
     @Override
