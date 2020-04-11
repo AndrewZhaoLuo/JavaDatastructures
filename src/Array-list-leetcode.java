@@ -30,10 +30,12 @@ class Solution {
     public int searchInsert(int[] nums, int target) {
             int low = 0;
             int high = nums.length -1;
-            int mid = (high+low)/2;
-            
+            int mid=0;
+
             while(low <= high)
             {
+                mid = (high+low)/2;
+                
                 if(nums[mid] == target){
                     return mid;
                 }
